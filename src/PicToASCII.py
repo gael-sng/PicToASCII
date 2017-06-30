@@ -2,41 +2,14 @@ import cv2
 import numpy
 import math
 import random
+import os
 
-def modulo (x):
-	if x > 0:
-		return x;
-	else:
-		return -x;
+# Pegar inputs: 
 
-img = cv2.imread("cat-2310623_1920.jpg", cv2.IMREAD_GRAYSCALE)
+img = cv2.imread(os.path.join("Images","cat.jpg"), cv2.IMREAD_GRAYSCALE)
 if img is None:
 	print("Could not load image");
 	exit();
-
-# Carregando a lista de caracteres
-char = cv2.imread("a.png", cv2.IMREAD_GRAYSCALE);
-if char is None:
-	print("Could not load char");
-	exit();
-
-pixel_multiplayer = 2;
-#_fileName = input("Enter the file name: ");
-#cv2.imshow("PicToASCII: Input image", img);
-#cv2.waitKey(0);
-#cv2.destroyAllWindows();
-
-if( pixel_multiplayer < 1 ):
-	pixel_multiplayer = 1;
-
-(char_hight,char_width) = char.shape; 
-
-print("Image information:")
-print("\tchar_hight: ", end="");
-print(char_hight);
-print("\tchar_width: ", end="");
-print(char_width);
-a =  input();
 
 (img_hight,img_width) = img.shape;
 
@@ -45,55 +18,88 @@ print("\timg_hight: ", end="");
 print(img_hight);
 print("\timg_width: ", end="");
 print(img_width);
-a =  input();
+#a =  input();
 
-img_hight = math.floor(img_hight / (char_hight * pixel_multiplayer))
-img_width = math.floor(img_width / (char_width * pixel_multiplayer))
+pixel_multiplayer = 2;
 
-img_hight = img_hight * (char_hight * pixel_multiplayer)
-img_width = img_width * (char_width * pixel_multiplayer)
+if( pixel_multiplayer < 1 ):
+	pixel_multiplayer = 1;
 
+if(pixel_multiplayer > 1):
+	# Calculando as novas dimenções
+	img_hight = math.floor(img_hight / pixel_multiplayer)
+	img_width = math.floor(img_width / pixel_multiplayer)
+
+	new_img = numpy.zeros((img_hight, img_width, 1), numpy.uint8);
+	# Reescalando a imagem
+	for y in range(0, img_hight):
+		for x in range(0, img_width):
+			pixel_sum = 0;
+			for i in range(0, pixel_multiplayer):
+				for j in range(0, pixel_multiplayer):
+					pixel_sum += img[(y*pixel_multiplayer)+i][(x*pixel_multiplayer)+j];
+			new_img[y][x] = pixel_sum/(pixel_multiplayer * pixel_multiplayer);
+					
+	print("Image new information:")
+	print("\timg_hight: ", end="");
+	print(img_hight);
+	print("\timg_width: ", end="");
+	print(img_width);
+	cv2.imwrite("temp.png", new_img)
+	img = new_img;
+#	a =  input();
+
+# Processamento detectando bordas da imagem deveria acontecer aqui:
+
+# Carregando a lista de caracteres
+char = cv2.imread(os.path.join("Font","32.png"), cv2.IMREAD_GRAYSCALE);
+if( char is None ):
+	print("Could not load image: 32.png");
+	exit();
+pass
+
+(char_hight,char_width) = char.shape; 
+
+print("Char Image information:")
+print("\tchar_hight: ", end="");
+print(char_hight);
+print("\tchar_width: ", end="");
+print(char_width);
+#a =  input();
+
+# Arredondando os parametros
+img_hight = math.floor(img_hight / char_hight)
+img_hight = img_hight * char_hight;
+img_width = math.floor(img_width / char_width)
+img_width = img_width * char_width;
 
 print("Image new information:")
 print("\timg_hight: ", end="");
-print(img_hight);
+print(img_hight/char_hight, end="");
+print(" caracteres")
 print("\timg_width: ", end="");
-print(img_width);
-a =  input();
+print(img_width/char_width, end="");
+print(" caracteres")
 
-# Percorrendo  
-for y in range(0, img_hight, char_hight*pixel_multiplayer ):
-	for x in range(0, img_width, char_width*pixel_multiplayer ):
+# A imagem grande comaprando os caracteres  
+for y in range(0, img_hight, char_hight ):
+	for x in range(0, img_width, char_width ):
 		# Percorrer todos os caracteres comparando ele com o bloco do caracter
-		dif = 0;
-		# Percorrendo o bloco do caracter
-		for h in range(0, char_hight, pixel_multiplayer):
-			for w in range(0, char_width, pixel_multiplayer):
-				# Percorrer a proporção de pixel na imagem
-				resumo_do_pixel = 0;
-				for r in range(0, pixel_multiplayer):
-					for c in range(0, pixel_multiplayer):
-						resumo_do_pixel += img[y+h+r][x+w+c];
-				
-				resumo_do_pixel = resumo_do_pixel/(pixel_multiplayer * pixel_multiplayer);
-				
-				dif += modulo(char[h][w] - resumo_do_pixel);
-		# Escolher o melhor caracter para colocar neste bloco 
-		dif = dif / (pixel_multiplayer*pixel_multiplayer)
-		if dif > 5500:
-			print("a", end="");
-		else:
-			print(".", end="");
+		best_char = 32;
+		best_fitness = -1;
+		for i in range(0,95):
+			dif = 0;
+			char = cv2.imread(os.path.join("Font",str(32+i) + ".png"), cv2.IMREAD_GRAYSCALE);
+			# Percorrendo o bloco do caracter
+			for h in range(0, char_hight):
+				for w in range(0, char_width):
+					dif += abs(char[h][w] - img[y + h][x + w]);
+		
+			# Comparando o caracter atual com o melhor até então 
+			if( best_fitness > dif or best_fitness == -1 ):
+				best_fitness = dif;
+				best_char = i + 32;
+		# Printando o caracter escolhido
+		print(chr(best_char), end="");
 		
 	print()
-	WWj
-	WWj
-	{|}
-	|
-QWERTYUIOPAS
-DFGHJKLÇZXCV
-BNM<!?@#$%*)_
-{}[]()\|/
-
-
-
