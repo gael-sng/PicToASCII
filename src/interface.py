@@ -1,7 +1,7 @@
 
 #Initializes
 op = 0;
-edgechoice = "L4" #Default choice
+edgechoice = "L8" #Default choice
 save = True #Default
 printText = False #Default
 
