@@ -14,6 +14,7 @@ if img is None:
 	print("Could not load image");
 	exit();
 
+# Carregando a lista de caracteres
 char = cv2.imread("a.png", cv2.IMREAD_GRAYSCALE);
 if char is None:
 	print("Could not load char");
@@ -63,7 +64,6 @@ a =  input();
 # Percorrendo  
 for y in range(0, img_hight, char_hight*pixel_multiplayer ):
 	for x in range(0, img_width, char_width*pixel_multiplayer ):
-
 		# Percorrer todos os caracteres comparando ele com o bloco do caracter
 		dif = 0;
 		# Percorrendo o bloco do caracter
@@ -79,9 +79,21 @@ for y in range(0, img_hight, char_hight*pixel_multiplayer ):
 				
 				dif += modulo(char[h][w] - resumo_do_pixel);
 		# Escolher o melhor caracter para colocar neste bloco 
+		dif = dif / (pixel_multiplayer*pixel_multiplayer)
 		if dif > 5500:
 			print("a", end="");
 		else:
 			print(".", end="");
 		
 	print()
+	WWj
+	WWj
+	{|}
+	|
+QWERTYUIOPAS
+DFGHJKLÇZXCV
+BNM<!?@#$%*)_
+{}[]()\|/
+
+
+
