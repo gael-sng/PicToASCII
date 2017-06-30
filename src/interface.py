@@ -2,6 +2,8 @@
 #Initializes
 op = 0;
 edgechoice = "L4" #Default choice
+save = True #Default
+printText = False #Default
 
 while(op != 3):
 	# Main menu
@@ -26,8 +28,10 @@ while(op != 3):
 	if op == 2:
 		# Set options menu
 		print("Choose options:")
-		# Set options choices
+		# Set options choices 
 		print("\t1- Choose the Edge Detection algorithm.")
+		print("\t2- Save resulting text in a file")
+		print("\t3- Print resulting text in the terminal")
 		op2 = int(input())
 		#Set options switch
 		if op2 == 1:
@@ -48,5 +52,29 @@ while(op != 3):
 				edgechoice = "G4"
 			if op3 == 4:
 				edgechoice = "G8"
+		if op2 == 2:
+			# Save Text Menu
+			print("Save resulting text in a file?")
+			# Save Text choices
+			print("\t1- Yes (Default)")
+			print("\t2- No")
+			op3 = int(input())
+			# Save Text Switch
+			if op3 == 1:
+				save = True
+			if op3 == 2:
+				save = False
+		if op2 == 3:
+			# Print Text Menu
+			print("Printing resulting text in the terminal?")
+			# Print Text choices
+			print("\t1- Yes")
+			print("\t2- No (Defalut)")
+			op3 = int(input())
+			# Print Text switch
+			if op3 == 1:
+				printText = True
+			if op3 == 2:
+				printText = False
 	if op == 3:
 		print ("Closing program...")
