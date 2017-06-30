@@ -48,7 +48,7 @@ while(op != 3):
 			print("\t2- Apply Laplacian 8 (Default)")
 			print("\t3- Apply Gaussian and Laplacian 4")
 			print("\t4- Apply Gaussian and Laplacian 8")
-			op3 = input()
+			op3 = int(input())
 			# Choose Edges switch
 			if op3 == 1:
 				edgechoice = "L4"
