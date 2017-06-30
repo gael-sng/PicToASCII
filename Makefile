@@ -1,2 +1,2 @@
 all:
-	python ./src/teste.py
+	python ./src/PicToASCII.py
