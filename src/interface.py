@@ -6,8 +6,10 @@ save = True #Default
 printText = False #Default
 
 while(op != 3):
+	print("Press Enter")
+	input()
 	# Main menu
-	print("\n\n\n\n")
+	print("\n\n\n\n\n\n\n\n\n\n\n\n")
 	print("Image to ascii software.")
 	print("Choose an option:")
 	# Main menu choices
@@ -27,10 +29,10 @@ while(op != 3):
 		# end transform code
 		if save == True:
 			# Save text img in a file
-			#
+			print("Saving File")
 		if printText == True:
 			# print text img in the terminal
-			#
+			print("Printing Text:")
 	if op == 2:
 		# Set options menu
 		print("Choose options:")
@@ -44,8 +46,8 @@ while(op != 3):
 			# Choose Edge Menu
 			print("Choose Edge Detection:")
 			# Choose Edge choices
-			print("\t1- Apply Laplacian 4")
-			print("\t2- Apply Laplacian 8 (Default)")
+			print("\t1- Apply Laplacian 4 (Default)")
+			print("\t2- Apply Laplacian 8")
 			print("\t3- Apply Gaussian and Laplacian 4")
 			print("\t4- Apply Gaussian and Laplacian 8")
 			op3 = int(input())
