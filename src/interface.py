@@ -25,6 +25,12 @@ while(op != 3):
 
 		
 		# end transform code
+		if save == True:
+			# Save text img in a file
+			#
+		if printText == True:
+			# print text img in the terminal
+			#
 	if op == 2:
 		# Set options menu
 		print("Choose options:")
@@ -69,7 +75,7 @@ while(op != 3):
 			print("Printing resulting text in the terminal?")
 			# Print Text choices
 			print("\t1- Yes")
-			print("\t2- No (Defalut)")
+			print("\t2- No (Default)")
 			op3 = int(input())
 			# Print Text switch
 			if op3 == 1:
