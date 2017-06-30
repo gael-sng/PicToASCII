@@ -44,8 +44,8 @@ while(op != 3):
 			# Choose Edge Menu
 			print("Choose Edge Detection:")
 			# Choose Edge choices
-			print("\t1- Apply Laplacian 4 (Default)")
-			print("\t2- Apply Laplacian 8")
+			print("\t1- Apply Laplacian 4")
+			print("\t2- Apply Laplacian 8 (Default)")
 			print("\t3- Apply Gaussian and Laplacian 4")
 			print("\t4- Apply Gaussian and Laplacian 8")
 			op3 = input()
