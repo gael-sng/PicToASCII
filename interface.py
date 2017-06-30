@@ -1,11 +1,15 @@
+from PicToASCII import PicToASCII
 
 #Initializes
 op = 0;
 edgechoice = "L8" #Default choice
 save = True #Default
 printText = False #Default
+char_quality = "_Ulow.png"
+pixel_reason = 1;
+image_Name = "frog.png"
 
-while(op != 4):
+while(op != 3):
 	print("Press Enter")
 	input()
 	# Main menu
@@ -15,25 +19,32 @@ while(op != 4):
 	# Main menu choices
 	print("\t1- Transform image.")
 	print("\t2- Set options.")
-	print("\t3- Run.")
-	print("\t4- Close program.")
+	print("\t3- Close program.")
 	op = int(input())
 	# Main menu switch
 	if op == 1:
 		#Transform image menu
 		print("Transform image:")
-		print("Give imagem filename.")
+		print("Give image filename.(Default = ENTER)")
 		filename = input()
+		if(filename == "\n" or filename == "" or filename is None):
+			print("frog selected")
+		else:
+			image_Name = filename
 		# Transform code
+		ASCII_Art = PicToASCII(char_quality,pixel_reason,edgechoice,image_Name)
+		if ASCII_Art is not None:
+			# end transform code
+			if save == True:
+				# Save text img in a file
+				print("Saving File")
+				file = open("Output.txt", "w")
+				file.write(ASCII_Art);
 
-		
-		# end transform code
-		if save == True:
-			# Save text img in a file
-			print("Saving File")
-		if printText == True:
-			# print text img in the terminal
-			print("Printing Text:")
+			if printText == True:
+				# print text img in the terminal
+				print("Printing Text:")
+				print(ASCII_Art)
 	if op == 2:
 		# Set options menu
 		print("Choose options:")
@@ -41,6 +52,7 @@ while(op != 4):
 		print("\t1- Choose the Edge Detection algorithm.")
 		print("\t2- Save resulting text in a file")
 		print("\t3- Print resulting text in the terminal")
+		print("\t4- Change char quality")
 		op2 = int(input())
 		#Set options switch
 		if op2 == 1:
@@ -85,5 +97,19 @@ while(op != 4):
 				printText = True
 			if op3 == 2:
 				printText = False
+		if op2 == 4:
+			#char quality
+			print("Choose char quality:")
+			print("\t1- Ultra Low")
+			print("\t2- Low")
+			print("\t3- High")
+			op3 = int(input())
+			# Char quality switch
+			if op3 == 1:
+				char_quality = ".png"
+			if op3 == 2:
+				char_quality = "_low.png"
+			if op3 == 3:
+				char_quality = "_Ulow.png"
 	if op == 3:
 		print ("Closing program...")
