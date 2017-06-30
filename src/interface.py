@@ -5,7 +5,7 @@ edgechoice = "L8" #Default choice
 save = True #Default
 printText = False #Default
 
-while(op != 3):
+while(op != 4):
 	print("Press Enter")
 	input()
 	# Main menu
@@ -15,7 +15,8 @@ while(op != 3):
 	# Main menu choices
 	print("\t1- Transform image.")
 	print("\t2- Set options.")
-	print("\t3- Close program.")
+	print("\t3- Run.")
+	print("\t4- Close program.")
 	op = int(input())
 	# Main menu switch
 	if op == 1:

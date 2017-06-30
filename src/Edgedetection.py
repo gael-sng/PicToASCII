@@ -3,10 +3,11 @@ import numpy as np
 from collections import Counter
 
 
+
 # Funcao que calcula o valor T para aplicar threshold de uma imagem img
 # utiliza-se do metodo de Otsu
 def Thresholding_Otsu(img):
-  nbins = 256
+	nbins = 256
 	pixel_counts  = Counter(img.ravel())
 	counts = np.array([0 for x in range(256)])
 	for c in sorted(pixel_counts):
